@@ -21,7 +21,24 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
+    # sorted_frequencies = sorted(hist.Items())
+    # return sorted_frequencies[-1]
+
+    # maximum = hist.Items()[0];
+    # for value, freq in hist.Items():
+    #     if freq > maximum[1]:
+    #         maximum = (value, freq)
+    #
+    # return maximum[0]
+
+    # freq, value = max([(freq, value) for value, freq in hist.Items()])
+    # return value
+
+    return AllModes(hist)[0][0]
+
+
+def ModeFromSeries(series):
+    return series.value_counts().idxmax()
 
 
 def AllModes(hist):
@@ -31,7 +48,7 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
+    return sorted(hist.Items(), key=itemgetter(1), reverse=True)
 
 
 def main(script):
@@ -44,6 +61,7 @@ def main(script):
 
     # test Mode    
     mode = Mode(hist)
+    # mode = ModeFromSeries(live.prglngth)
     print('Mode of preg length', mode)
     assert mode == 39, mode
 
